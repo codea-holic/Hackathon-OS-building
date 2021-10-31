@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
 
 	// "fyne.io/fyne/v2/theme"
@@ -16,10 +15,10 @@ import (
 	// "fyne.io/fyne/v2/widget"
 )
 
-func main() {
-	a := app.New()
-	w := a.NewWindow("Hello")
-	w.Resize(fyne.Size{800, 600});
+func GalleryApp(w fyne.Window) {
+	// a := app.New()
+	// w := a.NewWindow("Hello")
+	// w.Resize(fyne.Size{800, 600});
 
 	root_src := "C:\\Users\\Ganesh\\Pictures"
 	files, err := ioutil.ReadDir(root_src);
@@ -37,16 +36,15 @@ func main() {
 		}
 	}
 
-	// image := canvas.NewImageFromFile(picsArray[0]);
 	tabs := container.NewAppTabs(
 		container.NewTabItem("Image 1", canvas.NewImageFromFile(picsArray[0])),
 	)
 	for i := 1; i < len(picsArray); i++ {
 		tabs.Append(container.NewTabItem("Image "+ strconv.Itoa(i + 1), canvas.NewImageFromFile(picsArray[i])))
 	}
-	// tabs.SetTabLocation(container.TabLocationTrailing);
+	tabs.SetTabLocation(container.TabLocationTrailing);
 	
-	w.SetContent(tabs);
+	w.SetContent(container.NewBorder(panelContent, nil, nil, nil, tabs),)
 	// w.SetContent(image);
-	w.ShowAndRun()
+	w.Show()
 }

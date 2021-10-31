@@ -17,7 +17,7 @@ import (
 
 var count int = 1
 
-func main() {
+func textEditor() {
 	a := app.New()
 	w := a.NewWindow("Hello")
 	w.Resize(fyne.NewSize(500, 500))
@@ -81,5 +81,11 @@ func main() {
 		),
 	)
 
-	w.ShowAndRun()
+	w = myApp.NewWindow("Text Editor");
+	w.Resize(fyne.NewSize(500, 280));
+
+	w.SetContent(
+		container.NewBorder(DeskBtn, nil, nil, nil, content),
+	)
+	w.Show()
 }

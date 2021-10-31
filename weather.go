@@ -8,7 +8,6 @@ import (
 	"net/http"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	// "fyne.io/fyne/v2/widget"
@@ -47,21 +46,19 @@ func weatherApp(w fyne.Window) {
 	label5 := canvas.NewText(fmt.Sprintln("Humidity ", weather.Main.Humidity), color.Black)
 	label6 := canvas.NewText(fmt.Sprintln("Pressure ", weather.Main.Pressure), color.Black)
 
-	w.SetContent(
-		container.NewVBox(
-			label1,
-			img,
-			label2,
-			label3,
-			label4,
-			label5,
-			label6,
-			container.NewGridWithColumns(1,),
-		),
+	weatherContainer := container.NewVBox(
+		label1,
+		img,
+		label2,
+		label3,
+		label4,
+		label5,
+		label6,
+		container.NewGridWithColumns(1),
 	)
 
-	w.SetContent(container.NewBorder(panelContent, nil, nil, nil, weatherContainer),)
-	w.Show();
+	w.SetContent(container.NewBorder(panelContent, nil, nil, nil, weatherContainer))
+	w.Show()
 }
 
 func UnmarshalWeather(data []byte) (Weather, error) {

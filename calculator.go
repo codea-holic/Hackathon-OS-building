@@ -9,7 +9,7 @@ import (
 	"github.com/Knetic/govaluate"
 )
 
-func main() {
+func showCalc() {
 	a := app.New()
 	w := a.NewWindow("Calculator")
 	w.Resize(fyne.NewSize(500, 280));
@@ -130,21 +130,28 @@ func main() {
 		input.SetText(output);
 	})
 
-	w.SetContent(container.NewVBox(
-		input,
-		finalHistory,
-		container.NewGridWithColumns(1,
-			container.NewGridWithColumns(2, history, back),
-			container.NewGridWithColumns(4, clear, open, close, devide),
-			container.NewGridWithColumns(4, seven, eight, nine, multiply),
-			container.NewGridWithColumns(4, four, five, six, subtract),
-			container.NewGridWithColumns(4, one, two, three, plus),
-			container.NewGridWithColumns(2,
-				container.NewGridWithColumns(2, zero, dot),
-				equals,
+	calcContainer := container.NewVBox(
+		container.NewVBox(
+			input,
+			finalHistory,
+			container.NewGridWithColumns(1,
+				container.NewGridWithColumns(2, history, back),
+				container.NewGridWithColumns(4, clear, open, close, devide),
+				container.NewGridWithColumns(4, seven, eight, nine, multiply),
+				container.NewGridWithColumns(4, four, five, six, subtract),
+				container.NewGridWithColumns(4, one, two, three, plus),
+				container.NewGridWithColumns(2,
+					container.NewGridWithColumns(2, zero, dot),
+					equals,
+				),
 			),
-		),
-	))
+		),)
 
-	w.ShowAndRun()
+	w = myApp.NewWindow("Calc");
+	w.Resize(fyne.NewSize(500, 280));
+
+	w.SetContent(
+		container.NewBorder(DeskBtn, nil, nil, nil, calcContainer),
+	)
+	w.Show()
 }
