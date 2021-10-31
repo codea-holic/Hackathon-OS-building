@@ -15,9 +15,6 @@ import (
 )
 
 func weatherApp(w fyne.Window) {
-	// a := app.New()
-	// w := a.NewWindow("Forecast Weather")
-	// w.Resize(fyne.NewSize(500, 500))
 
 	// API PART
 	res, err := http.Get("http://api.openweathermap.org/data/2.5/weather?q=pune&APPID=c8c16d5d3b3508247e1544f634d1370c")
@@ -66,12 +63,6 @@ func weatherApp(w fyne.Window) {
 	w.SetContent(container.NewBorder(panelContent, nil, nil, nil, weatherContainer),)
 	w.Show();
 }
-
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse and unparse this JSON data, add this code to your project and do:
-//
-//    weather, err := UnmarshalWeather(bytes)
-//    bytes, err = weather.Marshal()
 
 func UnmarshalWeather(data []byte) (Weather, error) {
 	var r Weather
