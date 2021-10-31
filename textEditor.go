@@ -47,7 +47,6 @@ func textEditor() {
 		saveFileDialog.Show()
 	})
 
-
 	openBtn := widget.NewButton("Open Text File", func() {
 		openFileDialog := dialog.NewFileOpen(
 			func(r fyne.URIReadCloser, _ error) {
@@ -62,30 +61,28 @@ func textEditor() {
 
 				w.SetContent(container.NewScroll(veiwData))
 				w.Resize(fyne.NewSize(500, 500))
-				w.Show();
+				w.Show()
 			}, w)
 
-			openFileDialog.SetFilter(storage.NewExtensionFileFilter([] string{".txt"}));
-			openFileDialog.Show()
+		openFileDialog.SetFilter(storage.NewExtensionFileFilter([]string{".txt"}))
+		openFileDialog.Show()
 	})
 
-	w.SetContent(
-		container.NewVBox(
-			content,
-			input,
+	editorContent := container.NewVBox(
+		content,
+		input,
 
-			container.NewHBox(
-				saveBtn,
-				openBtn,
-			),
+		container.NewHBox(
+			saveBtn,
+			openBtn,
 		),
 	)
 
-	w = myApp.NewWindow("Text Editor");
-	w.Resize(fyne.NewSize(500, 280));
+	w = myApp.NewWindow("Text Editor")
+	w.Resize(fyne.NewSize(500, 280))
 
 	w.SetContent(
-		container.NewBorder(DeskBtn, nil, nil, nil, content),
+		container.NewBorder(DeskBtn, nil, nil, nil, editorContent),
 	)
 	w.Show()
 }
