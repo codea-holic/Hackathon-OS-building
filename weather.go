@@ -39,21 +39,43 @@ func weatherApp(w fyne.Window) {
 
 	label1 := canvas.NewText("Weather App", color.White)
 	label1.TextStyle = fyne.TextStyle{Bold: true}
-
-	label2 := canvas.NewText(fmt.Sprintf("country %s", weather.Sys.Country), color.White)
-	label3 := canvas.NewText(fmt.Sprintf("Wind Speed %.2f", weather.Wind.Speed), color.White)
-	label4 := canvas.NewText(fmt.Sprintf("Temperature %2f", weather.Main.Temp), color.White)
-	label5 := canvas.NewText(fmt.Sprintln("Humidity ", weather.Main.Humidity), color.White)
-	label6 := canvas.NewText(fmt.Sprintln("Pressure ", weather.Main.Pressure), color.White)
+	label1.Alignment = fyne.TextAlignCenter
+	
+	label2 := canvas.NewText(fmt.Sprintf("country : %s", weather.Sys.Country), color.White)
+	label2.TextStyle = fyne.TextStyle{Bold: true}
+	label2.Alignment = fyne.TextAlignCenter
+	label7 := canvas.NewText(fmt.Sprintf("city : %s", weather.Name), color.White)
+	label7.TextStyle = fyne.TextStyle{Bold: true}
+	label7.Alignment = fyne.TextAlignCenter
+	label3 := canvas.NewText(fmt.Sprintf("Wind Speed : %.2f", weather.Wind.Speed), color.White)
+	label3.TextStyle = fyne.TextStyle{Bold: true}
+	label3.Alignment = fyne.TextAlignCenter
+	label4 := canvas.NewText(fmt.Sprintf("Temperature : %2f", weather.Main.Temp), color.White)
+	label4.TextStyle = fyne.TextStyle{Bold: true}
+	label4.Alignment = fyne.TextAlignCenter
+	label5 := canvas.NewText(fmt.Sprintln("Humidity : ", weather.Main.Humidity), color.White)
+	label5.TextStyle = fyne.TextStyle{Bold: true}
+	label5.Alignment = fyne.TextAlignCenter
+	label6 := canvas.NewText(fmt.Sprintln("Pressure : ", weather.Main.Pressure), color.White)
+	label6.TextStyle = fyne.TextStyle{Bold: true}
+	label6.Alignment = fyne.TextAlignCenter
 
 	weatherContainer := container.NewVBox(
 		label1,
 		img,
-		label2,
-		label3,
-		label4,
-		label5,
-		label6,
+		container.NewGridWithColumns(3,
+
+			label7,
+			label2,
+			label3,
+			
+		),
+		container.NewGridWithColumns(1),
+		container.NewGridWithColumns(3,
+			label4,
+			label5,
+			label6,
+		),
 		container.NewGridWithColumns(1),
 	)
 
