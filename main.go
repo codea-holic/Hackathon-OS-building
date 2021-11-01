@@ -1,6 +1,11 @@
 package main
 
 import (
+	"bufio"
+	"io/ioutil"
+	"log"
+	"os"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
@@ -23,6 +28,18 @@ func main(){
 	myApp.Settings().Theme()
 	img = canvas.NewImageFromFile("C:\\Users\\Ganesh\\Desktop\\VirtualOS\\Desktop.jpg")
 	
+	iconFile , err := os.Open(".\\Icons\\home.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	r := bufio.NewReader(iconFile)
+
+	b, err := ioutil.ReadAll(r)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	btn1 = widget.NewButtonWithIcon("Weather App", theme.InfoIcon(), func() {
 		weatherApp(myWindow)
 	})
@@ -39,7 +56,7 @@ func main(){
 		textEditor()
 	})
 
-	DeskBtn = widget.NewButtonWithIcon("Home", theme.HomeIcon(), func () {
+	DeskBtn = widget.NewButtonWithIcon("Home", fyne.NewStaticResource("icon", b), func () {
 		myWindow.SetContent(container.NewBorder(panelContent, nil, nil, nil, img))
 	})
 
@@ -56,3 +73,22 @@ func main(){
 
 	myWindow.ShowAndRun()
 }
+
+
+/*
+iconFile, err := os.Open("C:/path/to/res/icon.png")
+if err != nil {
+	log.Fatal(err)
+}
+
+r := bufio.NewReader(iconFile)
+
+b, err := ioutil.ReadAll(r)
+if err != nil {
+	log.Fatal(err)
+}
+
+btn := widget.NewButtonWithIcon("Browse", fyne.NewStaticResource("icon", b), func() {
+	// do something
+})
+*/
