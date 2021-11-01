@@ -19,6 +19,7 @@ var btn1 fyne.Widget
 var btn2 fyne.Widget
 var btn3 fyne.Widget
 var btn4 fyne.Widget
+var btn5 fyne.Widget
 var DeskBtn fyne.Widget
 var img fyne.CanvasObject
 var panelContent *fyne.Container
@@ -91,6 +92,22 @@ func main() {
 		textEditor()
 	})
 
+	newsIcon, err := os.Open(".\\Icons\\news.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	newsReader := bufio.NewReader(newsIcon)
+	
+	news, err := ioutil.ReadAll(newsReader)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	btn5 = widget.NewButtonWithIcon("News App", fyne.NewStaticResource("icon", news), func() {
+		showNews(myWindow)
+	})
+	
 	homeIcon, err := os.Open(".\\Icons\\home.png")
 	if err != nil {
 		log.Fatal(err)
@@ -109,7 +126,7 @@ func main() {
 
 	panelContent = container.NewVBox((container.NewGridWithColumns(1,
 		container.NewGridWithColumns(3, DeskBtn, btn1, btn2),
-		container.NewGridWithColumns(3, btn3, btn4),
+		container.NewGridWithColumns(3, btn3, btn4, btn5),
 	)))
 
 	myWindow.Resize(fyne.NewSize(1280, 720))
