@@ -157,3 +157,5 @@ btn := widget.NewButtonWithIcon("Browse", fyne.NewStaticResource("icon", b), fun
 	// do something
 })
 */
+
+// go run .\main.go .\weather.go .\news.go .\textEditor.go .\gallery.go .\calculator.go

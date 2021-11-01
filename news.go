@@ -37,22 +37,26 @@ func showNews(w fyne.Window) {
 	label3 := widget.NewLabel(news.Articles[0].Title)
 	label3.TextStyle = fyne.TextStyle{Bold: true}
 	label3.Wrapping = fyne.TextWrapBreak
-
+	
 	// show articles
 	entry1 := widget.NewLabel(news.Articles[1].Description)
 	// entry1.MultiLine = true
 	entry1.Wrapping = fyne.TextWrapBreak
-	entry1.Resize(fyne.NewSize(300, 400))
-	entry1.Resize(fyne.NewSize(300, 300))
-	label4 := widget.NewLabel(fmt.Sprintf("Article: %s", news.Articles[0].Content))
+	entry1.Resize(fyne.NewSize(100, 100))
+	// label4 := widget.NewLabel(fmt.Sprintf("Article: %s", news.Articles[0].Content))
+	// label4.Resize(fyne.NewSize(200, 200))
 	btn := widget.NewButton("Next", func() {
 		num_article += 1
 		label3.Text = news.Articles[num_article].Title
+		// label3.TextStyle = fyne.TextStyle{Bold: true}
+		// label3.Wrapping = fyne.TextWrapBreak
 		entry1.Text = news.Articles[num_article].Description
-		label4.Text = news.Articles[num_article].Content
+		// entry1.Resize(fyne.NewSize(100, 300))
+		// label4.Text = news.Articles[num_article].Content
+		// label4.Resize(fyne.NewSize(40, 60))
 		label3.Refresh()
 		entry1.Refresh()
-		label4.Refresh()
+		// label4.Refresh()
 	})
 	label1 := canvas.NewText("News App", color.White)
 	label1.Alignment = fyne.TextAlignCenter
@@ -60,7 +64,7 @@ func showNews(w fyne.Window) {
 	img := canvas.NewImageFromFile("news-icon.png")
 	img.Resize(fyne.NewSize(200, 200))
 	img.FillMode = canvas.ImageFillOriginal
-	newsContainer := container.NewVBox(label1, label3, label4, entry1, btn)
+	newsContainer := container.NewVBox(label1, label3, entry1, btn)
 	newsContainer.Resize(fyne.NewSize(300, 300))
 	w.SetContent(container.NewBorder(panelContent, nil, nil, nil, newsContainer))
 	w.Show()
