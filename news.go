@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"image/color"
 	"io/ioutil"
 	"log"
@@ -27,7 +26,6 @@ func showNews(w fyne.Window) {
 	defer res.Body.Close()
 	body, _ := ioutil.ReadAll(res.Body)
 	news, _ = UnmarshalNews(body)
-	fmt.Println(news)
 
 	// num_article = int(news.TotalArticles)
 	// label2 := widget.NewLabel(fmt.Sprintf("No of articles:%d",
@@ -61,7 +59,7 @@ func showNews(w fyne.Window) {
 	label1 := canvas.NewText("News App", color.White)
 	label1.Alignment = fyne.TextAlignCenter
 	label1.TextStyle = fyne.TextStyle{Bold: true}
-	img := canvas.NewImageFromFile("news-icon.png")
+	img := canvas.NewImageFromFile("news.png")
 	img.Resize(fyne.NewSize(200, 200))
 	img.FillMode = canvas.ImageFillOriginal
 	newsContainer := container.NewVBox(label1, label3, entry1, btn)
